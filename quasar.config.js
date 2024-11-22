@@ -60,7 +60,10 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: {
+        supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InduY3JpdmdsdGJmemlqdG5vdm15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE3MzU2NDksImV4cCI6MjA0NzMxMTY0OX0.aL9zEFKBs9uhpIRlMjamPFRE0WeWqZc0c6TyqeZGceQ',
+        supabaseUrl: 'https://wncrivgltbfzijtnovmy.supabase.co'
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
@@ -99,6 +102,7 @@ module.exports = configure(function (/* ctx */) {
       // Quasar plugins
       plugins: [
         'Dialog',
+        'Notify',
       ]
     },
 

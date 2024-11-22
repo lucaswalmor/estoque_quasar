@@ -1,0 +1,6 @@
+{
+  "appId": "com.lksoftware.estoque",
+  "appName": "Meu Estoque",
+  "webDir": "dist/spa",
+  "bundledWebRuntime": false
+}

@@ -4,8 +4,8 @@
       <p class="col-12 text-center text-h5">Login</p>
 
       <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
-        <q-input v-model="form.email" label="Email" />
-        <q-input v-model="form.password" label="Password" />
+        <q-input v-model="form.email" type="email" label="Email" lazy-rules :rules="[val => (val && val.length > 0) || 'Por favor digite o email']" />
+        <q-input v-model="form.password" type="password" label="Password" lazy-rules :rules="[val => (val && val.length > 0) || 'Por favor digite a senha']" />
 
         <div>
           <q-btn size="sm" color="primary" label="Cadastro" flat class="full-width" type="submit" to="/register" />
@@ -21,15 +21,17 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuthUser from 'src/composables/useAuthUser';
+import useNotify from 'src/composables/useNotify';
 
 export default defineComponent({
   name: 'Login',
   setup() {
     const router = useRouter();
-    const { login } = useAuthUser();
+    const { notifySuccess, notifyDanger } = useNotify();
+    const { login, isLoggedIn } = useAuthUser();
 
     const form = ref({
       email: '',
@@ -41,9 +43,16 @@ export default defineComponent({
         await login(form.value)
         router.push({name: 'me'})
       } catch (error) {
-        alert(error.message)
+        // alert(error.message)
+        notifyDanger(error.message)
       }
     }
+
+    onMounted(() => {
+      if (isLoggedIn) {
+        router.push('/me')
+      }
+    })
 
     return {
       form,
